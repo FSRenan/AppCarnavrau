@@ -52,7 +52,7 @@ public class Autentificacao {
                 accessToken = url.replaceAll(".*#access_token=(.+)&.*", "$1");
 
                 FacebookClient fbClient = new DefaultFacebookClient(accessToken);
-                User user = fbClient.fetchObject("me", User.class, Parameter.with("fields", "id,name,gender,email,birthday"));
+                User user = fbClient.fetchObject("me", User.class, Parameter.with("fields", "id,name,gender,email,birthday,picture"));
                 System.out.println(accessToken);
                 
                 setDados(new DadosUsuario(user.getName(),user.getGender(),user.getBirthday(),user.getPicture()));
