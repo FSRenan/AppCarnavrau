@@ -41,7 +41,7 @@ public class Autentificacao {
         }
         //---------------------------------------------------------
         catch(Exception e){
-            System.out.println("Deu ruim!"); 
+            System.err.println("Deu ruim!"); 
         }
         String accessToken;
         while (true) {

@@ -1,5 +1,6 @@
 package appcarnavrau;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import twitter4j.Query;
@@ -8,6 +9,7 @@ import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
+import twitter4j.conf.ConfigurationBuilder;
 
 public class Feed extends javax.swing.JFrame {
 
@@ -193,18 +195,28 @@ public class Feed extends javax.swing.JFrame {
 
     private void btnPesquisaBlocosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaBlocosActionPerformed
         
-        Twitter twitter = TwitterFactory.getSingleton();
-        Query query = new Query("#carnavrau");
-        QueryResult result = null;
+        ConfigurationBuilder cf = new ConfigurationBuilder();
+        
+        cf.setDebugEnabled(true)
+                .setOAuthConsumerKey("RBGiXtHUXPuhRhvc5PxHaV9bq")
+                .setOAuthConsumerSecret("Ue9921E7uvzKdklJnmksrNO8n3kDnddxDfMlmXIW76qhxnqeBg")
+                .setOAuthAccessToken("842735810021613573-0Gi12yk5ZEJ8XZCdsqea3VQPZa3DzkW")
+                .setOAuthAccessTokenSecret("EzYLeI890fIp3sg7eYhAzc3hpGHMDzjZ9CaJCcyXKEaSX");
+        
+        TwitterFactory tf = new TwitterFactory(cf.build());
+        
+        twitter4j.Twitter twitter = tf.getInstance();
+                
         try {
-            result = twitter.search(query);
+            List <Status> status = twitter.getHomeTimeline();
+            
+            for(Status st:status){
+                System.out.println(st.getUser().getName()+ "    "+ st.getText());
+            }
         } catch (TwitterException ex) {
-            Logger.getLogger(Feed.class.getName()).log(Level.SEVERE, null, ex);
+             System.err.println("Deu ruim! Twitter!");
+             ex.printStackTrace();
         }
-        for (Status status : result.getTweets()) {
-            System.out.println("@" + status.getUser().getScreenName() + ":"
-                    + status.getText());
-        }   
     }//GEN-LAST:event_btnPesquisaBlocosActionPerformed
 
   
