@@ -194,40 +194,43 @@ public class Feed extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBloco1ActionPerformed
 
     private void btnPesquisaBlocosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaBlocosActionPerformed
-        
+        //Faz autentificação para conexão com o twitter
         ConfigurationBuilder cf = new ConfigurationBuilder();
-        
+
         cf.setDebugEnabled(true)
                 .setOAuthConsumerKey("RBGiXtHUXPuhRhvc5PxHaV9bq")
                 .setOAuthConsumerSecret("Ue9921E7uvzKdklJnmksrNO8n3kDnddxDfMlmXIW76qhxnqeBg")
                 .setOAuthAccessToken("842735810021613573-0Gi12yk5ZEJ8XZCdsqea3VQPZa3DzkW")
                 .setOAuthAccessTokenSecret("EzYLeI890fIp3sg7eYhAzc3hpGHMDzjZ9CaJCcyXKEaSX");
-        
+
         TwitterFactory tf = new TwitterFactory(cf.build());
-        
+
         twitter4j.Twitter twitter = tf.getInstance();
-                
+     
+ 
+        Query query = new Query("#climasp");
+        QueryResult result= null;
         try {
-            List <Status> status = twitter.getHomeTimeline();
-            
-            for(Status st:status){
-                System.out.println(st.getUser().getName()+ "    "+ st.getText());
-            }
+            result = twitter.search(query);
         } catch (TwitterException ex) {
-             System.err.println("Deu ruim! Twitter!");
-             ex.printStackTrace();
+            Logger.getLogger(Feed.class.getName()).log(Level.SEVERE, null, ex);
         }
+        for (Status status : result.getTweets()) {
+            System.out.println("@" + status.getUser().getScreenName() + ":"
+                    + status.getText());
+        }
+
+//        try {
+//            List<Status> status = twitter.getHomeTimeline();
+//
+//            for (Status st : status) {
+//                System.out.println(st.getUser().getName() + "    " + st.getText());
+//            }
+//        } catch (TwitterException ex) {
+//            System.err.println("Deu ruim! Twitter!");
+//            ex.printStackTrace();
+//        }
     }//GEN-LAST:event_btnPesquisaBlocosActionPerformed
-
-  
-    
-
-    
-
-  
-    
-
-    
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
