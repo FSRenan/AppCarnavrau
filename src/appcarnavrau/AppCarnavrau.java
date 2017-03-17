@@ -3,11 +3,12 @@ package appcarnavrau;
 
 
 import com.restfb.*;
+import com.restfb.types.Url;
 import org.openqa.selenium.*;
 
 public class AppCarnavrau extends javax.swing.JFrame {
 
-  
+
     public AppCarnavrau() {
         initComponents();
     }
@@ -75,12 +76,18 @@ public class AppCarnavrau extends javax.swing.JFrame {
         String domain = "https://google.com";
         String appId = "1428615457160436";
         Autentificacao aut = new Autentificacao(domain, appId);
+        
+        ///remover depois
         DadosUsuario retorno = aut.login();
         System.out.println(retorno.imprimir());
+        //----------------------
+        this.setVisible(false);
+        new Feed(retorno).setVisible(true);
+
         
 
     }//GEN-LAST:event_btnLogarActionPerformed
-
+    
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

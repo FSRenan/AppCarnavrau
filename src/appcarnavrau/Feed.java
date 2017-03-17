@@ -1,8 +1,12 @@
 package appcarnavrau;
 
 public class Feed extends javax.swing.JFrame {
-
-    public Feed() {
+    private DadosUsuario dados;
+    public Feed(){
+        
+    }
+    public Feed(DadosUsuario dados) {
+        this.dados = dados;
         initComponents();
     }
 
