@@ -1,5 +1,10 @@
 package appcarnavrau;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -69,6 +74,11 @@ public class Feed extends javax.swing.JFrame {
         });
 
         btnGame.setText("Game");
+        btnGame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGameActionPerformed(evt);
+            }
+        });
 
         btnPesquisaBlocos.setText("Pesquisa de Blocos");
         btnPesquisaBlocos.addActionListener(new java.awt.event.ActionListener() {
@@ -206,10 +216,9 @@ public class Feed extends javax.swing.JFrame {
         TwitterFactory tf = new TwitterFactory(cf.build());
 
         twitter4j.Twitter twitter = tf.getInstance();
-     
- 
-        Query query = new Query("#climasp");
-        QueryResult result= null;
+
+        Query query = new Query("#casacomigo");
+        QueryResult result = null;
         try {
             result = twitter.search(query);
         } catch (TwitterException ex) {
@@ -231,6 +240,18 @@ public class Feed extends javax.swing.JFrame {
 //            ex.printStackTrace();
 //        }
     }//GEN-LAST:event_btnPesquisaBlocosActionPerformed
+
+    private void btnGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGameActionPerformed
+        //Código a ser usado no frame do jogo para receber a imagem de perfil através da URL
+        
+        try (InputStream in = new URL(dados.getFoto().getUrl()).openStream()) {
+            Files.copy(in, Paths.get("C:\\Users\\Renan Ferreira\\Desktop\\teste1.jpg"));
+            System.out.println("Sucesso!");
+        } catch (IOException e) {
+            System.err.println("Erro imagem perfil!");
+        }
+    }//GEN-LAST:event_btnGameActionPerformed
+//-----------------------------------------------------------
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
