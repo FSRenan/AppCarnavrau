@@ -19,8 +19,10 @@ import twitter4j.conf.ConfigurationBuilder;
 
 public class Feed extends javax.swing.JFrame {
 
+    //Atributos da classe
     private DadosUsuario dados;
 
+    //Construtores
     public Feed() {
 
     }
@@ -207,7 +209,7 @@ public class Feed extends javax.swing.JFrame {
     private void btnPesquisaBlocosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaBlocosActionPerformed
         //Faz autentificação para conexão com o twitter
         ConfigurationBuilder cf = new ConfigurationBuilder();
-
+        //Faz a autentificação com os tokens de acesso
         cf.setDebugEnabled(true)
                 .setOAuthConsumerKey("RBGiXtHUXPuhRhvc5PxHaV9bq")
                 .setOAuthConsumerSecret("Ue9921E7uvzKdklJnmksrNO8n3kDnddxDfMlmXIW76qhxnqeBg")
@@ -217,7 +219,7 @@ public class Feed extends javax.swing.JFrame {
         TwitterFactory tf = new TwitterFactory(cf.build());
 
         twitter4j.Twitter twitter = tf.getInstance();
-
+        //Faz a pesquisa pela tag ou palavra de parâmetro
         Query query = new Query("#blocos");
         QueryResult result = null;
         try {
@@ -229,7 +231,7 @@ public class Feed extends javax.swing.JFrame {
             System.out.println("@" + status.getUser().getScreenName() + ":"
                     + status.getText());
         }
-
+        //Pega a HomeTimeLine do twitter
 //        try {
 //            List<Status> status = twitter.getHomeTimeline();
 //
@@ -244,13 +246,17 @@ public class Feed extends javax.swing.JFrame {
 
     private void btnGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGameActionPerformed
         //Código a ser usado no frame do jogo para receber a imagem de perfil através da URL
-        
+        //Cria objeto do tipo File
+        File foto = new File("FotoPerfil.jpg");
+        //Objeto que contém o arquivo da url
         try (InputStream in = new URL(dados.getFoto().getUrl()).openStream()) {
-            Files.copy(in, Paths.get("C:\\Users\\Renan Ferreira\\Desktop\\teste1.jpg"));
-            
-            File file = new File("C:\\Users\\Renan Ferreira\\Desktop\\teste1.jpg");
-            file.deleteOnExit();
-            
+
+            //Copia a foto da url para o arquivo FotoPerfil.jpg na pasta do projeto
+            Files.copy(in, Paths.get(foto.getAbsolutePath()));
+
+            //Apaga a foto da pasta do projeto ao finalizar a execução da aplicação
+            foto.deleteOnExit();
+
             System.out.println("Sucesso!");
         } catch (IOException e) {
             System.err.println("Erro imagem perfil!");
@@ -259,7 +265,7 @@ public class Feed extends javax.swing.JFrame {
 //-----------------------------------------------------------
 
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -280,9 +286,7 @@ public class Feed extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Feed.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
+        //</editor-fold>    
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Feed().setVisible(true);

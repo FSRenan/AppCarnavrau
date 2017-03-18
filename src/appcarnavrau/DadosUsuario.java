@@ -1,24 +1,27 @@
-
 package appcarnavrau;
 
 import com.restfb.types.ProfilePictureSource;
 
-
 public class DadosUsuario {
+
+    //Atributos da classe
+
     private String nome;
     private String genero;
     private String aniversario;
     private ProfilePictureSource foto;
-    
-    
-    public DadosUsuario(String nome,String genero,String aniversario,ProfilePictureSource foto){
-        
+
+    //Construtor
+    public DadosUsuario(String nome, String genero, String aniversario, ProfilePictureSource foto) {
+
         this.nome = nome;
         this.genero = genero;
         this.aniversario = aniversario;
         this.foto = foto;
-        
+
     }
+
+    //Gets e Sets da classe
 
     public String getNome() {
         return nome;
@@ -34,9 +37,6 @@ public class DadosUsuario {
 
     public void setGenero(String genero) {
         this.genero = genero;
-    }
-    public String imprimir(){
-        return "\nNome:"+ nome+ "\nGênero: "+ genero+ "\nAniversário: " + getAniversario();
     }
 
     public String getAniversario() {
@@ -54,4 +54,11 @@ public class DadosUsuario {
     public void setFoto(ProfilePictureSource foto) {
         this.foto = foto;
     }
+
+    //Método que retorna todos os dados da classe
+
+    public String imprimir() {
+        return "\nNome:" + nome + "\nGênero: " + genero + "\nAniversário: " + getAniversario();
+    }
+
 }

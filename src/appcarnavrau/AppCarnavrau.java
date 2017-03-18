@@ -1,19 +1,11 @@
-
 package appcarnavrau;
 
-
-import com.restfb.*;
-import com.restfb.types.Url;
-import org.openqa.selenium.*;
-
 public class AppCarnavrau extends javax.swing.JFrame {
-
 
     public AppCarnavrau() {
         initComponents();
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -64,23 +56,25 @@ public class AppCarnavrau extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogarActionPerformed
-
+        //Variáveis com o domínio e id do aplicativo
         String domain = "https://google.com";
         String appId = "1428615457160436";
+
+        //Cria um objeto da classe Autentificação, abre a tela de login do facebook
         Autentificacao aut = new Autentificacao(domain, appId);
-        
+
         ///remover depois
         DadosUsuario retorno = aut.login();
         System.out.println(retorno.imprimir());
         System.out.println(retorno.getFoto().getUrl());
         //----------------------
         this.setVisible(false);
+        //Chama o frame do feed passando como parâmetro os dados do usuário
         new Feed(retorno).setVisible(true);
 
-        
 
     }//GEN-LAST:event_btnLogarActionPerformed
-    
+
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
