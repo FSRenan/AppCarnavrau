@@ -31,9 +31,11 @@ public class Autentificacao {
         try{
             WebElement usuario = cr.findElement(By.name("email"));
             WebElement senha = cr.findElement(By.name("pass"));
-            
+          
             usuario.sendKeys("551144424268");
             senha.sendKeys("uam@1533");
+            
+     
   
     
             
