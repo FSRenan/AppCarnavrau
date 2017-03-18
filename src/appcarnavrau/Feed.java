@@ -1,18 +1,19 @@
 package appcarnavrau;
 
-import java.io.BufferedReader;
+
+import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import javax.imageio.ImageIO;
+import twitter4j.MediaEntity;
 import twitter4j.Query;
 import twitter4j.QueryResult;
 import twitter4j.Status;
@@ -220,44 +221,58 @@ public class Feed extends javax.swing.JFrame {
                 .setOAuthAccessToken("842735810021613573-0Gi12yk5ZEJ8XZCdsqea3VQPZa3DzkW")
                 .setOAuthAccessTokenSecret("EzYLeI890fIp3sg7eYhAzc3hpGHMDzjZ9CaJCcyXKEaSX");
 
-        TwitterFactory tf = new TwitterFactory(cf.build());
-
-        twitter4j.Twitter twitter = tf.getInstance();
-        //Faz a pesquisa pela tag ou palavra de parâmetro
-
-        Query query = new Query("#BLOCOsS");
-        System.out.println("dfsd");
-
-        QueryResult result = null;
-        try {
-            result = twitter.search(query);
-        } catch (TwitterException ex) {
-            Logger.getLogger(Feed.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        for (Status status : result.getTweets()) {
-            System.out.println("@" + status.getUser().getScreenName() + ":"
-                    + status.getText());
-        }
-        List<twitter4j.Status> tweets = result.getTweets();
-        for (twitter4j.Status tweet : tweets) {
-            if (tweet.getMediaEntities().length != 0) {//If there is media in a tweet
-                //Do anything you want with image 
-                //tweet.getMediaEntities()[0].getMediaURL() is url of image in a tweet. For example:
-                System.out.println((tweet.getMediaEntities()[0].getMediaURL()));
-                //Log.d(TAG, tweet.getMediaEntities()[0].getMediaURL()));
+        Twitter twitter = new TwitterFactory(cf.build()).getInstance();
+        Query query = new Query("filter:images" + "#carnavrau");
+        int numberOfTweets = 6;
+        long lastID = Long.MAX_VALUE;
+        ArrayList<Status> tweets = new ArrayList<Status>();
+        while (tweets.size() < numberOfTweets) {
+            if (numberOfTweets - tweets.size() > 100) {
+                query.setCount(100);
+            } else {
+                query.setCount(numberOfTweets - tweets.size());
             }
+            try {
+                QueryResult result = twitter.search(query);
+                tweets.addAll(result.getTweets());
+                System.out.println("Gathered " + tweets.size() + " tweets" + "\n");
+                for (Status t : tweets) {
+                    if (t.getId() < lastID) {
+                        lastID = t.getId();
+                    }
+                }
+                for (int i = 0; i < tweets.size(); i++) {
+                    Status t = (Status) tweets.get(i);
+
+                    // GeoLocation loc = t.getGeoLocation();
+                    String user = t.getUser().getScreenName();
+                    String msg = t.getText();
+                    //String time = "";
+                    //if (loc!=null) {
+                    //Double lat = t.getGeoLocation().getLatitude();
+                    //Double lon = t.getGeoLocation().getLongitude();*/
+                    MediaEntity[] media = t.getMediaEntities(); //get the media entities from the status
+                    for (MediaEntity m : media) { //search trough your entities
+                        System.out.println(m.getMediaURL());
+                        URL url = new URL(m.getMediaURL());
+
+                        Image image = ImageIO.read(url);
+
+                    }
+                    //System.out.println(i + " USER: " + user + " wrote: " + msg + "\n");
+                }
+
+            } catch (TwitterException te) {
+                System.out.println("Couldn't connect: " + te);
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(Feed.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Feed.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            query.setMaxId(lastID - 1);
         }
-        //Pega a HomeTimeLine do twitter
-//        try {
-//            List<Status> status = twitter.getHomeTimeline();
-//
-//            for (Status st : status) {
-//                System.out.println(st.getUser().getName() + "    " + st.getText());
-//            }
-//        } catch (TwitterException ex) {
-//            System.err.println("Deu ruim! Twitter!");
-//            ex.printStackTrace();
-//        }
+
+
     }//GEN-LAST:event_btnPesquisaBlocosActionPerformed
 
     private void btnGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGameActionPerformed
