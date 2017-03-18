@@ -218,7 +218,7 @@ public class Feed extends javax.swing.JFrame {
 
         twitter4j.Twitter twitter = tf.getInstance();
 
-        Query query = new Query("#casacomigo");
+        Query query = new Query("#blocos");
         QueryResult result = null;
         try {
             result = twitter.search(query);
