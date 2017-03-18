@@ -81,13 +81,11 @@ public class Autentificacao {
     }
 
     //Get dos dados do usuário
-
     public DadosUsuario getDados() {
         return dados;
     }
 
     //Set dos dados do usuário
-
     public void setDados(DadosUsuario dados) {
         this.dados = dados;
     }
