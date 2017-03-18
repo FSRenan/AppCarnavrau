@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import twitter4j.MediaEntity;
 import twitter4j.Query;
 import twitter4j.QueryResult;
@@ -36,6 +37,17 @@ public class Feed extends javax.swing.JFrame {
         this.dados = dados;
         initComponents();
     }
+    public ImageIcon MostrarImagem(URL local) {
+        //Cria um imagem icon a partir do local selecionado
+        ImageIcon img = new ImageIcon(local);
+        //Transforma o ImageIcon para Image para conseguir redimensionar     
+        Image minhaImagem = img.getImage();
+        //Redimenciona imagem do tamanho do Jlabel
+        Image newImg = minhaImagem.getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        //Cria um image icon com imagem redimencionada pro tamanho do Jlabel
+        ImageIcon image = new ImageIcon(newImg);
+        return image;
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -54,12 +66,17 @@ public class Feed extends javax.swing.JFrame {
         lblInformacao = new javax.swing.JLabel();
         btnSobre = new javax.swing.JButton();
         lblFundo = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 102, 153));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel1.setLayout(null);
 
         lblIconeTempo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/appcarnavrau/sol.png"))); // NOI18N
         lblIconeTempo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -70,16 +87,24 @@ public class Feed extends javax.swing.JFrame {
                 lblIconeTempoMouseExited(evt);
             }
         });
+        jPanel1.add(lblIconeTempo);
+        lblIconeTempo.setBounds(390, 0, 50, 50);
 
         lblTemperatura.setText("30º");
+        jPanel1.add(lblTemperatura);
+        lblTemperatura.setBounds(410, 60, 17, 18);
 
         lblFeed.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 6));
+        jPanel1.add(lblFeed);
+        lblFeed.setBounds(10, 247, 420, 422);
 
         lblMensagem.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 lblMensagemPropertyChange(evt);
             }
         });
+        jPanel1.add(lblMensagem);
+        lblMensagem.setBounds(200, 80, 230, 30);
 
         btnGame.setText("Game");
         btnGame.addActionListener(new java.awt.event.ActionListener() {
@@ -87,6 +112,8 @@ public class Feed extends javax.swing.JFrame {
                 btnGameActionPerformed(evt);
             }
         });
+        jPanel1.add(btnGame);
+        btnGame.setBounds(20, 10, 120, 30);
 
         btnPesquisaBlocos.setText("Pesquisa de Blocos");
         btnPesquisaBlocos.addActionListener(new java.awt.event.ActionListener() {
@@ -94,91 +121,48 @@ public class Feed extends javax.swing.JFrame {
                 btnPesquisaBlocosActionPerformed(evt);
             }
         });
+        jPanel1.add(btnPesquisaBlocos);
+        btnPesquisaBlocos.setBounds(150, 10, 123, 30);
 
         txtBloco1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBloco1ActionPerformed(evt);
             }
         });
+        jPanel1.add(txtBloco1);
+        txtBloco1.setBounds(10, 120, 410, 30);
+        jPanel1.add(txtBloco2);
+        txtBloco2.setBounds(10, 160, 410, 30);
+        jPanel1.add(txtBloco3);
+        txtBloco3.setBounds(10, 200, 410, 30);
 
         lblInformacao.setText("BLOCOS MAIS PROXIMOS DE VOCE:");
+        jPanel1.add(lblInformacao);
+        lblInformacao.setBounds(20, 90, 290, 14);
 
         btnSobre.setText("Sobre");
+        jPanel1.add(btnSobre);
+        btnSobre.setBounds(280, 10, 61, 30);
 
         lblFundo.setText("jLabel1");
+        jPanel1.add(lblFundo);
+        lblFundo.setBounds(0, 0, 440, 680);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(lblInformacao, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(txtBloco1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(txtBloco2, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(150, 150, 150)
-                .addComponent(btnPesquisaBlocos))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(390, 390, 390)
-                .addComponent(lblIconeTempo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(lblFeed, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(btnGame, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(txtBloco3, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(200, 200, 200)
-                .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(280, 280, 280)
-                .addComponent(btnSobre))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(410, 410, 410)
-                .addComponent(lblTemperatura))
-            .addComponent(lblFundo, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addComponent(lblInformacao)
-                .addGap(16, 16, 16)
-                .addComponent(txtBloco1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(txtBloco2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(btnPesquisaBlocos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(lblIconeTempo)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(247, 247, 247)
-                .addComponent(lblFeed, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(btnGame, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(200, 200, 200)
-                .addComponent(txtBloco3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(80, 80, 80)
-                .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(btnSobre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(lblTemperatura, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(lblFundo, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        jLabel1.setText("jLabel1");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(240, 280, 160, 170);
+
+        jLabel2.setText("jLabel2");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(240, 474, 160, 180);
+
+        jLabel3.setText("jLabel3");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(40, 480, 170, 160);
+
+        jLabel4.setText("jLabel4");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(40, 290, 160, 150);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -221,56 +205,47 @@ public class Feed extends javax.swing.JFrame {
                 .setOAuthAccessToken("842735810021613573-0Gi12yk5ZEJ8XZCdsqea3VQPZa3DzkW")
                 .setOAuthAccessTokenSecret("EzYLeI890fIp3sg7eYhAzc3hpGHMDzjZ9CaJCcyXKEaSX");
 
-        Twitter twitter = new TwitterFactory(cf.build()).getInstance();
-        Query query = new Query("filter:images" + "#carnavrau");
-        int numberOfTweets = 6;
-        long lastID = Long.MAX_VALUE;
-        ArrayList<Status> tweets = new ArrayList<Status>();
-        while (tweets.size() < numberOfTweets) {
-            if (numberOfTweets - tweets.size() > 100) {
-                query.setCount(100);
-            } else {
-                query.setCount(numberOfTweets - tweets.size());
-            }
-            try {
-                QueryResult result = twitter.search(query);
-                tweets.addAll(result.getTweets());
-                System.out.println("Gathered " + tweets.size() + " tweets" + "\n");
-                for (Status t : tweets) {
-                    if (t.getId() < lastID) {
-                        lastID = t.getId();
-                    }
+                TwitterFactory tf = new TwitterFactory(cf.build());
+
+        twitter4j.Twitter twitter = tf.getInstance();
+
+        Query query = new Query("filter:images" + "#carnaval");
+
+        try {
+            QueryResult result = twitter.search(query);
+            int j = 0;
+            for (Status status : result.getTweets()) {
+                MediaEntity[] media = status.getMediaEntities(); //get the media entities from the status
+                for (MediaEntity m : media) { //search trough your entities
+                    System.out.println(m.getMediaURL()); //get your url!
+                    URL url = new URL(m.getMediaURL());
+
+                        if (j == 0) {
+                            jLabel2.setIcon(MostrarImagem(url));
+                            System.out.println(url);
+
+                        }
+                       
+                        if (j == 1) {
+                            jLabel1.setIcon(MostrarImagem(url));
+                            System.out.println(url);
+
+                        }
+                        if (j == 2) {
+                            jLabel3.setIcon(MostrarImagem(url));
+
+                        }
+                        if (j == 3) {
+                            jLabel4.setIcon(MostrarImagem(url));
+
+                        }
+                        j++;
                 }
-                for (int i = 0; i < tweets.size(); i++) {
-                    Status t = (Status) tweets.get(i);
-
-                    // GeoLocation loc = t.getGeoLocation();
-                    String user = t.getUser().getScreenName();
-                    String msg = t.getText();
-                    //String time = "";
-                    //if (loc!=null) {
-                    //Double lat = t.getGeoLocation().getLatitude();
-                    //Double lon = t.getGeoLocation().getLongitude();*/
-                    MediaEntity[] media = t.getMediaEntities(); //get the media entities from the status
-                    for (MediaEntity m : media) { //search trough your entities
-                        System.out.println(m.getMediaURL());
-                        URL url = new URL(m.getMediaURL());
-
-                        Image image = ImageIO.read(url);
-                        
-
-                    }
-                    //System.out.println(i + " USER: " + user + " wrote: " + msg + "\n");
-                }
-
-            } catch (TwitterException te) {
-                System.out.println("Couldn't connect: " + te);
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(Feed.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(Feed.class.getName()).log(Level.SEVERE, null, ex);
             }
-            query.setMaxId(lastID - 1);
+        } catch (TwitterException ex) {
+            Logger.getLogger(Feed.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(Feed.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 
@@ -330,6 +305,10 @@ public class Feed extends javax.swing.JFrame {
     private javax.swing.JButton btnGame;
     private javax.swing.JButton btnPesquisaBlocos;
     private javax.swing.JButton btnSobre;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblFeed;
     private javax.swing.JLabel lblFundo;
