@@ -224,7 +224,10 @@ public class Feed extends javax.swing.JFrame {
 
         twitter4j.Twitter twitter = tf.getInstance();
         //Faz a pesquisa pela tag ou palavra de parâmetro
-        Query query = new Query("#Carnaval");
+
+        Query query = new Query("#BLOCOsS");
+        System.out.println("dfsd");
+
         QueryResult result = null;
         try {
             result = twitter.search(query);
