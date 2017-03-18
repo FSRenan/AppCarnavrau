@@ -1,5 +1,6 @@
 package appcarnavrau;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -246,6 +247,10 @@ public class Feed extends javax.swing.JFrame {
         
         try (InputStream in = new URL(dados.getFoto().getUrl()).openStream()) {
             Files.copy(in, Paths.get("C:\\Users\\Renan Ferreira\\Desktop\\teste1.jpg"));
+            
+            File file = new File("C:\\Users\\Renan Ferreira\\Desktop\\teste1.jpg");
+            file.deleteOnExit();
+            
             System.out.println("Sucesso!");
         } catch (IOException e) {
             System.err.println("Erro imagem perfil!");
