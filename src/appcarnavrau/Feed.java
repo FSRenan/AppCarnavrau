@@ -1,14 +1,18 @@
 package appcarnavrau;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import twitter4j.Query;
 import twitter4j.QueryResult;
 import twitter4j.Status;
@@ -220,8 +224,7 @@ public class Feed extends javax.swing.JFrame {
 
         twitter4j.Twitter twitter = tf.getInstance();
         //Faz a pesquisa pela tag ou palavra de parâmetro
-        Query query = new Query("#carnaval");
-        Query query = new Query("#carnavals");
+        Query query = new Query("#Carnaval");
         QueryResult result = null;
         try {
             result = twitter.search(query);
@@ -231,6 +234,15 @@ public class Feed extends javax.swing.JFrame {
         for (Status status : result.getTweets()) {
             System.out.println("@" + status.getUser().getScreenName() + ":"
                     + status.getText());
+        }
+        List<twitter4j.Status> tweets = result.getTweets();
+        for (twitter4j.Status tweet : tweets) {
+            if (tweet.getMediaEntities().length != 0) {//If there is media in a tweet
+                //Do anything you want with image 
+                //tweet.getMediaEntities()[0].getMediaURL() is url of image in a tweet. For example:
+                System.out.println((tweet.getMediaEntities()[0].getMediaURL()));
+                //Log.d(TAG, tweet.getMediaEntities()[0].getMediaURL()));
+            }
         }
         //Pega a HomeTimeLine do twitter
 //        try {
