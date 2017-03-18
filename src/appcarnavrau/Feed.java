@@ -257,6 +257,7 @@ public class Feed extends javax.swing.JFrame {
                         URL url = new URL(m.getMediaURL());
 
                         Image image = ImageIO.read(url);
+                        
 
                     }
                     //System.out.println(i + " USER: " + user + " wrote: " + msg + "\n");
