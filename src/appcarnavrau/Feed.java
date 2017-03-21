@@ -37,13 +37,13 @@ public class Feed extends javax.swing.JFrame {
         initComponents();
     }
 
-    public ImageIcon MostrarImagem(URL local) {
+    public ImageIcon MostrarImagem(URL local,javax.swing.JLabel label) {
         //Cria um imagem icon a partir do local selecionado
         ImageIcon img = new ImageIcon(local);
         //Transforma o ImageIcon para Image para conseguir redimensionar     
         Image minhaImagem = img.getImage();
         //Redimenciona imagem do tamanho do Jlabel
-        Image newImg = minhaImagem.getScaledInstance(lblQUADROFOTOS.getWidth(), lblQUADROFOTOS.getHeight(), Image.SCALE_SMOOTH);
+        Image newImg = minhaImagem.getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
         //Cria um image icon com imagem redimencionada pro tamanho do Jlabel
         ImageIcon image = new ImageIcon(newImg);
         return image;
@@ -126,8 +126,6 @@ public class Feed extends javax.swing.JFrame {
         lblFOTO3.setText("jLabel3");
 
         lblFOTO4.setText("jLabel2");
-
-        lblFundo.setText("jLabel1");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -276,21 +274,21 @@ public class Feed extends javax.swing.JFrame {
             for (Status status : result.getTweets()) {
                 MediaEntity[] media = status.getMediaEntities(); //get the media entities from the status
                 for (MediaEntity m : media) { //search trough your entities
-                    System.out.println(m.getMediaURL()); //get your url!
+                 System.out.println(m.getMediaURL()); //get your url!
                     URL url = new URL(m.getMediaURL());
                     if (j == 0) {
-                        lblFOTO4.setIcon(MostrarImagem(url));
+                        lblFOTO4.setIcon(MostrarImagem(url,lblFOTO4));
                         System.out.println(url);
                     }
                     if (j == 1) {
-                        lblFOTO2.setIcon(MostrarImagem(url));
+                        lblFOTO2.setIcon(MostrarImagem(url,lblFOTO4));
                         System.out.println(url);
                     }
                     if (j == 2) {
-                        lblFOTO3.setIcon(MostrarImagem(url));
+                        lblFOTO3.setIcon(MostrarImagem(url,lblFOTO4));
                     }
                     if (j == 3) {
-                        lblFOTO1.setIcon(MostrarImagem(url));
+                        lblFOTO1.setIcon(MostrarImagem(url,lblFOTO4));
                     }
                     j++;
                 }
