@@ -28,7 +28,7 @@ public class AppCarnavrau extends javax.swing.JFrame {
             }
         });
 
-        lblFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/appcarnavrau/TelaInicio.jpg"))); // NOI18N
+        lblFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/appcarnavrau/TelaInicio2.jpg"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
