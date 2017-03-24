@@ -35,6 +35,52 @@ public class Feed extends javax.swing.JFrame {
     public Feed(DadosUsuario dados) {
         this.dados = dados;
         initComponents();
+            //Faz autentificação para conexão com o twitter
+        ConfigurationBuilder cf = new ConfigurationBuilder();
+        //Faz a autentificação com os tokens de acesso
+        cf.setDebugEnabled(true)
+                .setOAuthConsumerKey("RBGiXtHUXPuhRhvc5PxHaV9bq")
+                .setOAuthConsumerSecret("Ue9921E7uvzKdklJnmksrNO8n3kDnddxDfMlmXIW76qhxnqeBg")
+                .setOAuthAccessToken("842735810021613573-0Gi12yk5ZEJ8XZCdsqea3VQPZa3DzkW")
+                .setOAuthAccessTokenSecret("EzYLeI890fIp3sg7eYhAzc3hpGHMDzjZ9CaJCcyXKEaSX");
+
+        
+        TwitterFactory tf = new TwitterFactory(cf.build());
+        twitter4j.Twitter twitter = tf.getInstance();
+        //Filtras imagens com a hashtag
+        Query query = new Query("filter:images" + "#carnaval");
+
+        try {
+            QueryResult result = twitter.search(query);
+            int j = 0;
+            for (Status status : result.getTweets()) {
+                MediaEntity[] media = status.getMediaEntities(); //get the media entities from the status
+                for (MediaEntity m : media) { //search trough your entities
+                 System.out.println(m.getMediaURL()); //get your url!
+                    URL url = new URL(m.getMediaURL());
+                    if (j == 0) {
+                        lblFOTO4.setIcon(MostrarImagem(url,lblFOTO4));
+                        System.out.println(url);
+                    }
+                    if (j == 1) {
+                        lblFOTO2.setIcon(MostrarImagem(url,lblFOTO4));
+                        System.out.println(url);
+                    }
+                    if (j == 2) {
+                        lblFOTO3.setIcon(MostrarImagem(url,lblFOTO4));
+                    }
+                    if (j == 3) {
+                        lblFOTO1.setIcon(MostrarImagem(url,lblFOTO4));
+                    }
+                    j++;
+                }
+            }
+        } catch (TwitterException ex) {
+            Logger.getLogger(Feed.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(Feed.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      
     }
 
     public ImageIcon MostrarImagem(URL local,javax.swing.JLabel label) {
@@ -253,51 +299,7 @@ public class Feed extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBloco1ActionPerformed
 
     private void btnPesquisaBlocosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaBlocosActionPerformed
-        //Faz autentificação para conexão com o twitter
-        ConfigurationBuilder cf = new ConfigurationBuilder();
-        //Faz a autentificação com os tokens de acesso
-        cf.setDebugEnabled(true)
-                .setOAuthConsumerKey("RBGiXtHUXPuhRhvc5PxHaV9bq")
-                .setOAuthConsumerSecret("Ue9921E7uvzKdklJnmksrNO8n3kDnddxDfMlmXIW76qhxnqeBg")
-                .setOAuthAccessToken("842735810021613573-0Gi12yk5ZEJ8XZCdsqea3VQPZa3DzkW")
-                .setOAuthAccessTokenSecret("EzYLeI890fIp3sg7eYhAzc3hpGHMDzjZ9CaJCcyXKEaSX");
-
-        
-        TwitterFactory tf = new TwitterFactory(cf.build());
-        twitter4j.Twitter twitter = tf.getInstance();
-        //Filtras imagens com a hashtag
-        Query query = new Query("filter:images" + "#علاقتك_مع_الجوال");
-
-        try {
-            QueryResult result = twitter.search(query);
-            int j = 0;
-            for (Status status : result.getTweets()) {
-                MediaEntity[] media = status.getMediaEntities(); //get the media entities from the status
-                for (MediaEntity m : media) { //search trough your entities
-                 System.out.println(m.getMediaURL()); //get your url!
-                    URL url = new URL(m.getMediaURL());
-                    if (j == 0) {
-                        lblFOTO4.setIcon(MostrarImagem(url,lblFOTO4));
-                        System.out.println(url);
-                    }
-                    if (j == 1) {
-                        lblFOTO2.setIcon(MostrarImagem(url,lblFOTO4));
-                        System.out.println(url);
-                    }
-                    if (j == 2) {
-                        lblFOTO3.setIcon(MostrarImagem(url,lblFOTO4));
-                    }
-                    if (j == 3) {
-                        lblFOTO1.setIcon(MostrarImagem(url,lblFOTO4));
-                    }
-                    j++;
-                }
-            }
-        } catch (TwitterException ex) {
-            Logger.getLogger(Feed.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(Feed.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    
 
 
     }//GEN-LAST:event_btnPesquisaBlocosActionPerformed
