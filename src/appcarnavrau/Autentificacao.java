@@ -34,6 +34,7 @@ public class Autentificacao {
 
         //Abre o Chrome com a URL de login do Facebook
         cr.get(authUrl);
+     
 
         //Auto login-----------------------------------------------
         try {
@@ -41,7 +42,7 @@ public class Autentificacao {
             WebElement senha = cr.findElement(By.name("pass"));
             WebElement logar = cr.findElement(By.name("login"));
 
-            usuario.sendKeys("551144424268");
+            usuario.sendKeys("pji.uam@gmail.com");
             senha.sendKeys("uam@1533");
 
             logar.click();
