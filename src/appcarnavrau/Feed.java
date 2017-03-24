@@ -48,6 +48,7 @@ public class Feed extends javax.swing.JFrame {
         TwitterFactory tf = new TwitterFactory(cf.build());
         twitter4j.Twitter twitter = tf.getInstance();
         //Filtras imagens com a hashtag
+        Query query = new Query("filter:images" + "#g1");
 
         try {
             QueryResult result = twitter.search(query);
