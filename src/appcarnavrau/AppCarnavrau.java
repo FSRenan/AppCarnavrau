@@ -31,7 +31,7 @@ public class AppCarnavrau extends javax.swing.JFrame {
         jPanel1.add(btnLogar);
         btnLogar.setBounds(50, 120, 240, 31);
 
-        lblFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/appcarnavrau/tela3.jpg"))); // NOI18N
+        lblFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/appcarnavrau/TelaInicio2.jpg"))); // NOI18N
         jPanel1.add(lblFundo);
         lblFundo.setBounds(0, 0, 340, 470);
 
