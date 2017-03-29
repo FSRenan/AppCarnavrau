@@ -47,6 +47,7 @@ public class Feed extends javax.swing.JFrame {
         public void run() {
             ArrayList<URL> urls = new ArrayList();
             //Faz autentificação para conexão com o twitter
+<<<<<<< HEAD
             ConfigurationBuilder cf = new ConfigurationBuilder();
             //Faz a autentificação com os tokens de acesso
             cf.setDebugEnabled(true)
@@ -72,6 +73,21 @@ public class Feed extends javax.swing.JFrame {
                         if (!urls.contains(url)) {
                             urls.add(url);
                         }
+=======
+        ConfigurationBuilder cf = new ConfigurationBuilder();
+        //Faz a autentificação com os tokens de acesso
+        cf.setDebugEnabled(true)
+                .setOAuthConsumerKey("RBGiXtHUXPuhRhvc5PxHaV9bq")
+                .setOAuthConsumerSecret("Ue9921E7uvzKdklJnmksrNO8n3kDnddxDfMlmXIW76qhxnqeBg")
+                .setOAuthAccessToken("842735810021613573-0Gi12yk5ZEJ8XZCdsqea3VQPZa3DzkW")
+                .setOAuthAccessTokenSecret("EzYLeI890fIp3sg7eYhAzc3hpGHMDzjZ9CaJCcyXKEaSX");
+
+        
+        TwitterFactory tf = new TwitterFactory(cf.build());
+        twitter4j.Twitter twitter = tf.getInstance();
+        //Filtras imagens com a hashtag
+        Query query = new Query("filter:images" + "#g1");
+>>>>>>> origin/master
 
                     }
                 }
