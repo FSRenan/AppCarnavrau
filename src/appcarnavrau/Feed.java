@@ -43,7 +43,7 @@ public class Feed extends javax.swing.JFrame {
         new Thread(t1).start();
     }
     //Execução paralela de atualizar imagens do twitter
-    private Runnable t1 = new Runnable() {
+    private Runnable t1 = new Runnable(0) {
         public void run() {
             ArrayList<URL> urls = new ArrayList();
             //Faz autentificação para conexão com o twitter
@@ -59,7 +59,7 @@ public class Feed extends javax.swing.JFrame {
             TwitterFactory tf = new TwitterFactory(cf.build());
             twitter4j.Twitter twitter = tf.getInstance();
             //Filtras imagens com a hashtag
-            Query query = new Query("filter:images" + "#FrazeDoDia");
+            Query query = new Query("filter:images" + "#MULHER");
 
             try {
                 QueryResult result = twitter.search(query);
@@ -97,17 +97,25 @@ public class Feed extends javax.swing.JFrame {
                 while (urls.get(i) != null) {
 
                     lblFOTO4.setIcon(ajustarImagem(urls.get(i), lblFOTO4));
+//                 jPainel.setComponentZOrder(lblFOTO4, 2);
                     i++;
                     lblFOTO3.setIcon(ajustarImagem(urls.get(i), lblFOTO4));
+             
                     i++;
                     lblFOTO2.setIcon(ajustarImagem(urls.get(i), lblFOTO4));
+                
                     i++;
                     lblFOTO1.setIcon(ajustarImagem(urls.get(i), lblFOTO4));
+                   
                     i++;
 
                     //Aguarda 5 segundos para atualizar
                     try {
-                        Thread.sleep(5000);
+                        for (int j = 10; j >=0; j--) {
+                            Thread.sleep(1000);
+                            lblCont.setText(j+"s");
+                        }
+                        Thread.sleep(1000);
                     } catch (InterruptedException ex) {
 
                     }
@@ -132,12 +140,17 @@ public class Feed extends javax.swing.JFrame {
         ImageIcon image = new ImageIcon(newImg);
         return image;
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        jPanel1 = new javax.swing.JPanel();
+        jPainel = new javax.swing.JPanel();
+        lblFOTO2 = new javax.swing.JLabel();
+        lblFOTO3 = new javax.swing.JLabel();
+        lblFOTO4 = new javax.swing.JLabel();
+        lblFOTO1 = new javax.swing.JLabel();
         lblIconeTempo = new javax.swing.JLabel();
         lblTemperatura = new javax.swing.JLabel();
         lblMensagem = new javax.swing.JLabel();
@@ -148,18 +161,24 @@ public class Feed extends javax.swing.JFrame {
         txtBloco3 = new javax.swing.JTextField();
         lblInformacao = new javax.swing.JLabel();
         btnSobre = new javax.swing.JButton();
+        lblCont = new javax.swing.JLabel();
         lblQUADROFOTOS = new javax.swing.JLabel();
-        lblFOTO1 = new javax.swing.JLabel();
-        lblFOTO2 = new javax.swing.JLabel();
-        lblFOTO3 = new javax.swing.JLabel();
-        lblFOTO4 = new javax.swing.JLabel();
         lblFundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 102, 153));
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
+        jPainel.setBackground(new java.awt.Color(255, 255, 255));
+
+        lblFOTO2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/appcarnavrau/sol.png"))); // NOI18N
+        lblFOTO2.setText("jLabel1");
+
+        lblFOTO3.setText("jLabel3");
+
+        lblFOTO4.setText("jLabel2");
+
+        lblFOTO1.setText("DFDFD");
 
         lblIconeTempo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/appcarnavrau/sol.png"))); // NOI18N
         lblIconeTempo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -203,118 +222,129 @@ public class Feed extends javax.swing.JFrame {
 
         btnSobre.setText("Sobre");
 
-        lblQUADROFOTOS.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 6));
+        lblCont.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblCont.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblCont.setText("10s");
 
-        lblFOTO2.setText("jLabel1");
+        lblQUADROFOTOS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/appcarnavrau/stock-vector-poster-with-paper-frame-colored-dust-confetti-balls-and-serpentine-ribbon-and-empty-space-for-584318125.jpg"))); // NOI18N
 
-        lblFOTO3.setText("jLabel3");
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, lblQUADROFOTOS, org.jdesktop.beansbinding.ELProperty.create("${background}"), lblFundo, org.jdesktop.beansbinding.BeanProperty.create("background"));
+        bindingGroup.addBinding(binding);
 
-        lblFOTO4.setText("jLabel2");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(410, 410, 410)
-                .addComponent(lblTemperatura))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(txtBloco3, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(220, 220, 220)
-                .addComponent(lblFOTO2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(220, 220, 220)
-                .addComponent(lblFOTO4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(txtBloco2, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(lblInformacao, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(btnGame, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPainelLayout = new javax.swing.GroupLayout(jPainel);
+        jPainel.setLayout(jPainelLayout);
+        jPainelLayout.setHorizontalGroup(
+            jPainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPainelLayout.createSequentialGroup()
+                .addGap(380, 380, 380)
+                .addComponent(lblIconeTempo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPainelLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(txtBloco1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(280, 280, 280)
-                .addComponent(btnSobre))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(390, 390, 390)
-                .addComponent(lblIconeTempo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(lblFundo, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(lblQUADROFOTOS, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(lblFOTO1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(150, 150, 150)
-                .addComponent(btnPesquisaBlocos))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(lblFOTO3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(jPainelLayout.createSequentialGroup()
+                .addGap(220, 220, 220)
+                .addComponent(lblFOTO4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPainelLayout.createSequentialGroup()
                 .addGap(200, 200, 200)
                 .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(lblTemperatura, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(122, 122, 122)
-                .addComponent(txtBloco3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPainelLayout.createSequentialGroup()
+                .addGap(220, 220, 220)
+                .addComponent(lblFOTO2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPainelLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(lblFOTO2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(lblFOTO4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(160, 160, 160)
-                .addComponent(txtBloco2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addComponent(lblInformacao))
-            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(btnGame, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPainelLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(lblInformacao, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPainelLayout.createSequentialGroup()
+                .addGap(150, 150, 150)
+                .addComponent(btnPesquisaBlocos))
+            .addGroup(jPainelLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(btnGame, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(120, 120, 120)
-                .addComponent(txtBloco1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(txtBloco3, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPainelLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(btnSobre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(lblIconeTempo)
-            .addComponent(lblFundo, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(240, 240, 240)
-                .addComponent(lblQUADROFOTOS, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(250, 250, 250)
-                .addComponent(lblFOTO1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(btnPesquisaBlocos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(450, 450, 450)
                 .addComponent(lblFOTO3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(jPainelLayout.createSequentialGroup()
+                .addGap(290, 290, 290)
+                .addComponent(lblCont))
+            .addGroup(jPainelLayout.createSequentialGroup()
+                .addGap(280, 280, 280)
+                .addComponent(btnSobre))
+            .addGroup(jPainelLayout.createSequentialGroup()
+                .addGap(410, 410, 410)
+                .addComponent(lblTemperatura))
+            .addGroup(jPainelLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(txtBloco2, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPainelLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(lblFOTO1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(lblQUADROFOTOS)
+            .addComponent(lblFundo, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        jPainelLayout.setVerticalGroup(
+            jPainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPainelLayout.createSequentialGroup()
+                .addComponent(lblIconeTempo)
+                .addGap(70, 70, 70)
+                .addComponent(txtBloco1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(304, 304, 304)
+                .addComponent(lblFOTO4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPainelLayout.createSequentialGroup()
                 .addGap(80, 80, 80)
                 .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPainelLayout.createSequentialGroup()
+                .addGap(250, 250, 250)
+                .addComponent(lblFOTO2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPainelLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(btnGame, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPainelLayout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addComponent(lblInformacao))
+            .addGroup(jPainelLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(btnPesquisaBlocos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPainelLayout.createSequentialGroup()
+                .addGap(200, 200, 200)
+                .addComponent(txtBloco3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPainelLayout.createSequentialGroup()
+                .addGap(450, 450, 450)
+                .addComponent(lblFOTO3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPainelLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(lblCont, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPainelLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(btnSobre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPainelLayout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(lblTemperatura, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPainelLayout.createSequentialGroup()
+                .addGap(160, 160, 160)
+                .addComponent(txtBloco2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPainelLayout.createSequentialGroup()
+                .addGap(250, 250, 250)
+                .addComponent(lblFOTO1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPainelLayout.createSequentialGroup()
+                .addGap(240, 240, 240)
+                .addComponent(lblQUADROFOTOS, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(lblFundo, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPainel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPainel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        bindingGroup.bind();
 
         pack();
         setLocationRelativeTo(null);
@@ -395,7 +425,8 @@ public class Feed extends javax.swing.JFrame {
     private javax.swing.JButton btnGame;
     private javax.swing.JButton btnPesquisaBlocos;
     private javax.swing.JButton btnSobre;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPainel;
+    private javax.swing.JLabel lblCont;
     private javax.swing.JLabel lblFOTO1;
     private javax.swing.JLabel lblFOTO2;
     private javax.swing.JLabel lblFOTO3;
@@ -409,5 +440,6 @@ public class Feed extends javax.swing.JFrame {
     private javax.swing.JTextField txtBloco1;
     private javax.swing.JTextField txtBloco2;
     private javax.swing.JTextField txtBloco3;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
