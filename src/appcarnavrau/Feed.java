@@ -22,7 +22,7 @@ import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
- import java.util.Collections;
+import java.util.Collections;
 import twitter4j.conf.ConfigurationBuilder;
 
 public class Feed extends javax.swing.JFrame {
@@ -43,11 +43,11 @@ public class Feed extends javax.swing.JFrame {
         new Thread(t1).start();
     }
     //Execução paralela de atualizar imagens do twitter
-    private Runnable t1 = new Runnable(0) {
+    private Runnable t1 = new Runnable() {
         public void run() {
-            ArrayList<URL> urls = new ArrayList();
-            //Faz autentificação para conexão com o twitter
+            ArrayList<URL> urls = new ArrayList(100000);
 
+            //Faz autentificação para conexão com o twitter
             ConfigurationBuilder cf = new ConfigurationBuilder();
             //Faz a autentificação com os tokens de acesso
             cf.setDebugEnabled(true)
@@ -59,61 +59,41 @@ public class Feed extends javax.swing.JFrame {
             TwitterFactory tf = new TwitterFactory(cf.build());
             twitter4j.Twitter twitter = tf.getInstance();
             //Filtras imagens com a hashtag
-            Query query = new Query("filter:images" + "#MULHER");
-
-            try {
-                QueryResult result = twitter.search(query);
-                int j = 0;
-                for (Status status : result.getTweets()) {
-                    MediaEntity[] media = status.getMediaEntities(); //get the media entities from the status
-                    for (MediaEntity m : media) { //search trough your entities
-                        System.out.println(m.getMediaURL()); //get your url!
-                        URL url = new URL(m.getMediaURL());
-
-                        if (!urls.contains(url)) {
-                            urls.add(url);
-                        }
-
-    
-
-                    }
-                }
-
-            } catch (TwitterException ex) {
-                Logger.getLogger(Feed.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(Feed.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            TratamentoTweets trata = new TratamentoTweets();
+            
+           trata.pesquisarTag(twitter, "#mulher", urls);
+             trata.pesquisarTag(twitter, "#g1", urls);
             //Exibe as urls no Array
             System.out.println("\n-----URLS NO ARRAY!");
             for (URL url : urls) {
                 System.out.println(url);
             }
+            System.out.println("-----ArrayAcabou: " + urls.size());
             Collections.shuffle(urls);
             //________________________
             int i = 0;
             try {
-                
+
                 while (urls.get(i) != null) {
 
                     lblFOTO4.setIcon(ajustarImagem(urls.get(i), lblFOTO4));
 //                 jPainel.setComponentZOrder(lblFOTO4, 2);
                     i++;
                     lblFOTO3.setIcon(ajustarImagem(urls.get(i), lblFOTO4));
-             
+
                     i++;
                     lblFOTO2.setIcon(ajustarImagem(urls.get(i), lblFOTO4));
-                
+
                     i++;
                     lblFOTO1.setIcon(ajustarImagem(urls.get(i), lblFOTO4));
-                   
+
                     i++;
 
                     //Aguarda 5 segundos para atualizar
                     try {
-                        for (int j = 10; j >=0; j--) {
+                        for (int k = 3; k >= 0; k--) {
                             Thread.sleep(1000);
-                            lblCont.setText(j+"s");
+                            lblCont.setText(k + "s");
                         }
                         Thread.sleep(1000);
                     } catch (InterruptedException ex) {
@@ -140,7 +120,7 @@ public class Feed extends javax.swing.JFrame {
         ImageIcon image = new ImageIcon(newImg);
         return image;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
