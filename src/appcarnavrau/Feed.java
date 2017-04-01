@@ -61,8 +61,13 @@ public class Feed extends javax.swing.JFrame {
             //Filtras imagens com a hashtag
             TratamentoTweets trata = new TratamentoTweets();
             
-           trata.pesquisarTag(twitter, "#mulher", urls);
-             trata.pesquisarTag(twitter, "#g1", urls);
+           trata.pesquisarTag(twitter, "#motos", urls,200);
+            System.out.println(urls.size());
+         trata.pesquisarTag(twitter, "#carros", urls,300);
+         trata.pesquisarTag(twitter, "#g1", urls,300);
+           System.out.println(urls.size());
+           
+           
             //Exibe as urls no Array
             System.out.println("\n-----URLS NO ARRAY!");
             for (URL url : urls) {
@@ -71,7 +76,10 @@ public class Feed extends javax.swing.JFrame {
             System.out.println("-----ArrayAcabou: " + urls.size());
             Collections.shuffle(urls);
             //________________________
-            int i = 0;
+          
+            boolean atualizar = true;
+            while(atualizar){
+                int i = 0;
             try {
 
                 while (urls.get(i) != null) {
@@ -102,9 +110,9 @@ public class Feed extends javax.swing.JFrame {
                 }
 
             } catch (Exception e) {
-                System.out.println("ArrayAcabou!");
+                
             }
-            System.out.println(i);
+            }
 
         }
     };

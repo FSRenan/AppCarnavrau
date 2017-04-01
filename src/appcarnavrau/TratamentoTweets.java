@@ -18,22 +18,21 @@ import twitter4j.Status;
  */
 public class TratamentoTweets {
 
-    public void pesquisarTag(twitter4j.Twitter twitter, String tag, ArrayList<URL> urls) {
+    public void pesquisarTag(twitter4j.Twitter twitter, String tag, ArrayList<URL> urls, int num) {
         Query query = new Query("filter:images" + tag);
 
         try {
 
-            int numberOfTweets = 10000;
+            int numberOfTweets = num;
             ArrayList<Status> tweets = new ArrayList<Status>();
-            while (tweets.size() < numberOfTweets) {
-                if (numberOfTweets - tweets.size() > 100) {
-                    query.setCount(100);
-                } else {
-                    query.setCount(numberOfTweets - tweets.size());
-                }
-                QueryResult result = twitter.search(query);
+        
+            
+            query.setCount(numberOfTweets);
+               
+               
+            QueryResult result = twitter.search(query);
 
-                int j = 0;
+         
                 tweets.addAll(result.getTweets());
                 for (Status status : tweets) {
                     MediaEntity[] media = status.getMediaEntities(); //get the media entities from the status
@@ -48,7 +47,7 @@ public class TratamentoTweets {
                         }
                     }
                 }
-            }
+      
           
         }
         catch(Exception e){
