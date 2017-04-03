@@ -60,14 +60,16 @@ public class Feed extends javax.swing.JFrame {
             twitter4j.Twitter twitter = tf.getInstance();
             //Filtras imagens com a hashtag
             TratamentoTweets trata = new TratamentoTweets();
-            
-           trata.pesquisarTag(twitter, "#motos", urls,200);
+
+            trata.pesquisarTag(twitter, "#ThankYouJustinBieber", urls, 1000);
             System.out.println(urls.size());
-         trata.pesquisarTag(twitter, "#carros", urls,300);
-         trata.pesquisarTag(twitter, "#g1", urls,300);
-           System.out.println(urls.size());
-           
-           
+            trata.pesquisarTag(twitter, "#jb", urls, 1000);
+            System.out.println(urls.size());
+            trata.pesquisarTag(twitter, "#justinbieber", urls, 1000);
+            System.out.println(urls.size());
+            trata.pesquisarTag(twitter, "#justin", urls, 1000);
+            trata.pesquisarTag(twitter, "#show", urls, 1000);
+            trata.pesquisarTag(twitter, "#brasil", urls, 1000);
             //Exibe as urls no Array
             System.out.println("\n-----URLS NO ARRAY!");
             for (URL url : urls) {
@@ -76,42 +78,42 @@ public class Feed extends javax.swing.JFrame {
             System.out.println("-----ArrayAcabou: " + urls.size());
             Collections.shuffle(urls);
             //________________________
-          
+
             boolean atualizar = true;
-            while(atualizar){
+            while (atualizar) {
                 int i = 0;
-            try {
+                try {
 
-                while (urls.get(i) != null) {
+                    while (urls.get(i) != null) {
 
-                    lblFOTO4.setIcon(ajustarImagem(urls.get(i), lblFOTO4));
+                        lblFOTO4.setIcon(ajustarImagem(urls.get(i), lblFOTO4));
 //                 jPainel.setComponentZOrder(lblFOTO4, 2);
-                    i++;
-                    lblFOTO3.setIcon(ajustarImagem(urls.get(i), lblFOTO4));
+                        i++;
+                        lblFOTO3.setIcon(ajustarImagem(urls.get(i), lblFOTO4));
 
-                    i++;
-                    lblFOTO2.setIcon(ajustarImagem(urls.get(i), lblFOTO4));
+                        i++;
+                        lblFOTO2.setIcon(ajustarImagem(urls.get(i), lblFOTO4));
 
-                    i++;
-                    lblFOTO1.setIcon(ajustarImagem(urls.get(i), lblFOTO4));
+                        i++;
+                        lblFOTO1.setIcon(ajustarImagem(urls.get(i), lblFOTO4));
 
-                    i++;
+                        i++;
 
-                    //Aguarda 5 segundos para atualizar
-                    try {
-                        for (int k = 3; k >= 0; k--) {
+                        //Aguarda 5 segundos para atualizar
+                        try {
+                            for (int k = 3; k >= 0; k--) {
+                                Thread.sleep(1000);
+                                lblCont.setText(k + "s");
+                            }
                             Thread.sleep(1000);
-                            lblCont.setText(k + "s");
+                        } catch (InterruptedException ex) {
+
                         }
-                        Thread.sleep(1000);
-                    } catch (InterruptedException ex) {
-
                     }
-                }
 
-            } catch (Exception e) {
-                
-            }
+                } catch (Exception e) {
+
+                }
             }
 
         }
