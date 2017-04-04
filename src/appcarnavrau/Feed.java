@@ -60,11 +60,11 @@ public class Feed extends javax.swing.JFrame {
             //Declaraçao de objeto tratamento tweets
             TratamentoTweets trata = new TratamentoTweets();
             //Adiciona ao array urls das imagens relacionadas as tags
+            trata.pesquisarTag(twitter, "#CarnavalSP", urls, 1000);
+            System.out.println(urls.size());
             trata.pesquisarTag(twitter, "#Carnavrau", urls, 1000);
             System.out.println(urls.size());
             trata.pesquisarTag(twitter, "#Carnaval", urls, 1000);
-            System.out.println(urls.size());
-            trata.pesquisarTag(twitter, "#CarnavalSP", urls, 1000);
             System.out.println(urls.size());
 
             //Exibe as urls no Array
