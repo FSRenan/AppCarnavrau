@@ -29,7 +29,7 @@ public class Feed extends javax.swing.JFrame {
 
     //Atributos da classe
     private DadosUsuario dados;
-    private String endereco;
+    private String endereco = "Av. Paulista";
 
     //Construtores
     public Feed() {
@@ -296,11 +296,13 @@ public class Feed extends javax.swing.JFrame {
 
     private void btnPesquisaBlocosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaBlocosActionPerformed
         try {
-            PesquisaBlocos pb = new PesquisaBlocos();
+            PesquisaBlocos pb = new PesquisaBlocos(endereco);
             pb.setVisible(true);
+            this.setVisible(false);
         } catch (Exception ex) {
             Logger.getLogger(Feed.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
 
     }//GEN-LAST:event_btnPesquisaBlocosActionPerformed
 

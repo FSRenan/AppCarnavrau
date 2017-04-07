@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  *
  * @author cleide
  */
-public class Bloco {
+public class Bloco implements Comparable<Bloco>{
 
     private String nome;
     private String nomeRua;
@@ -86,6 +86,21 @@ public class Bloco {
 
     public void setDia(String dia) {
         this.dia = dia;
+    }
+//
+    
+    @Override
+    public int compareTo(Bloco bloco) {
+        double distancia1 = Double.parseDouble(this.km);
+        double distancia2 = Double.parseDouble(bloco.getKm());
+          if (distancia1 < distancia2) {
+            return -1;
+        }
+        if (distancia1 > distancia2) {
+            return 1;
+        }
+        return 0;
+        //To change body of generated methods, choose Tools | Templates.
     }
 
 }
