@@ -5,7 +5,6 @@ import com.restfb.types.ProfilePictureSource;
 public class DadosUsuario {
 
     //Atributos da classe
-
     private String nome;
     private String genero;
     private String aniversario;
@@ -22,7 +21,6 @@ public class DadosUsuario {
     }
 
     //Gets e Sets da classe
-
     public String getNome() {
         return nome;
     }
@@ -56,7 +54,6 @@ public class DadosUsuario {
     }
 
     //Método que retorna todos os dados da classe
-
     public String imprimir() {
         return "\nNome:" + nome + "\nGênero: " + genero + "\nAniversário: " + getAniversario();
     }

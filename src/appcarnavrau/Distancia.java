@@ -33,11 +33,11 @@ public class Distancia {
 
         DistanceMatrixApiRequest request = DistanceMatrixApi.getDistanceMatrix(context, origem, destino);
         DistanceMatrix results = request.await();// faz a requisição no Google Maps e recupera a resposta  
-        
+
         String dist = results.rows[0].elements[0].distance + "";
-        
-        dist = dist.replaceAll("[a-z]", "");        
-         
+
+        dist = dist.replaceAll("[a-z]", "");
+
         return dist;// Mostra a distância entre a origem e o destino
 
     }

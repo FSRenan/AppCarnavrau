@@ -6,26 +6,38 @@
 package appcarnavrau;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author cleide
  */
-public class Blocos {
+public class Bloco {
 
     private String nome;
     private String nomeRua;
     private String km;
     private String tempo;
+    private String cidade;
+    private String dia;
+    private Distancia dist = new Distancia("AIzaSyB8hLA0u4PfXBhBV10yCORsBXvGAszNhlU");
 
-    public Blocos() {
+    public Bloco() {
     }
 
-    public Blocos(String nome, String nomeRua, String km, String tempo) {
+    public Bloco(String nome, String nomeRua, String endOrigem, String cidade, String dia) {
         this.nome = nome;
         this.nomeRua = nomeRua;
-        this.km = km;
-        this.tempo = tempo;
+        this.cidade = cidade;
+        this.dia = dia;
+        try {
+            this.km = dist.calcDistancia(endOrigem, nomeRua);
+            this.tempo = dist.calcTempo(endOrigem, nomeRua);
+        } catch (Exception ex) {
+
+        }
+
     }
 
     public String getNomeRua() {
@@ -52,14 +64,28 @@ public class Blocos {
         this.tempo = tempo;
     }
 
-   
-
     public String getNome() {
         return nome;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getDia() {
+        return dia;
+    }
+
+    public void setDia(String dia) {
+        this.dia = dia;
     }
 
 }

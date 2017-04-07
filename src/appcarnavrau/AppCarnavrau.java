@@ -67,7 +67,6 @@ public class AppCarnavrau extends javax.swing.JFrame {
         //Chama o frame do feed passando como parâmetro os dados do usuário
         new Feed(retorno).setVisible(true);
 
-
     }//GEN-LAST:event_btnLogarActionPerformed
 
     public static void main(String args[]) {

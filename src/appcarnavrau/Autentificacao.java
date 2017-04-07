@@ -34,7 +34,6 @@ public class Autentificacao {
 
         //Abre o Chrome com a URL de login do Facebook
         cr.get(authUrl);
-     
 
         //Auto login-----------------------------------------------
         try {

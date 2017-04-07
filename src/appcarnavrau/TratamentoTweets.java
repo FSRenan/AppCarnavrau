@@ -1,4 +1,3 @@
-
 package appcarnavrau;
 
 import java.net.URL;
@@ -7,7 +6,6 @@ import twitter4j.MediaEntity;
 import twitter4j.Query;
 import twitter4j.QueryResult;
 import twitter4j.Status;
-
 
 public class TratamentoTweets {
 
@@ -23,23 +21,21 @@ public class TratamentoTweets {
             QueryResult result = twitter.search(query);
             //Filtras os tweets e pega apenas url de midias
             tweets.addAll(result.getTweets());
-                for (Status status : tweets) {
-                    MediaEntity[] media = status.getMediaEntities(); //get the media entities from the status
-                    for (MediaEntity m : media) { //search trough your entities
-                        URL url = new URL(m.getMediaURL());
-                        //Verifica no array se ja existe a url
-                        if (!urls.contains(url)) {
-                            urls.add(url);
-                            System.out.println(url);
-                                  
-                        }
+            for (Status status : tweets) {
+                MediaEntity[] media = status.getMediaEntities(); //get the media entities from the status
+                for (MediaEntity m : media) { //search trough your entities
+                    URL url = new URL(m.getMediaURL());
+                    //Verifica no array se ja existe a url
+                    if (!urls.contains(url)) {
+                        urls.add(url);
+                        System.out.println(url);
+
                     }
                 }
-      
-          
-        }
-        catch(Exception e){
-          
+            }
+
+        } catch (Exception e) {
+
         }
     }
 }

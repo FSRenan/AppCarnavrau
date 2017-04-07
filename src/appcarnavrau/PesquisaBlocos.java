@@ -14,32 +14,28 @@ import javax.swing.JOptionPane;
 
 public class PesquisaBlocos extends javax.swing.JFrame {
 
-    private Distancia disc = new Distancia("AIzaSyB8hLA0u4PfXBhBV10yCORsBXvGAszNhlU");
-
-    private ArrayList<Blocos> blocos = new ArrayList();
+    private ArrayList<Bloco> blocos = new ArrayList();
     private String endereco = "Av.Paulista";
-    private Blocos bcProximos[] = new Blocos[3];
+    private Bloco bcProximos[] = new Bloco[3];
 
     //Adicionar construtor com endereco 
     public PesquisaBlocos() throws Exception {
         initComponents();
+        //Receberá do construtor o endereco da tela de login
         atualizarArray(endereco);
 
     }
 
     public void atualizarArray(String endereco) throws Exception {
-        //Bloco Casa comigo
-        String distancia = disc.calcDistancia(endereco, "Avenida Faria Lima");
-        String tempo = disc.calcTempo(endereco, "Avenida Faria Lima");
-
-        System.out.println(distancia + " " + tempo);
-
-        blocos.add(new Blocos("Casa Comigo", "Avenida Faria Lima", distancia, tempo));
+        //Adicionando blocos e suas informações ao Array 
+        blocos.add(new Bloco("Casa Comigo", "Avenida Faria Lima", endereco, "São Paulo", "03 de Março"));
+        blocos.add(new Bloco("Ma-que-bloco","Rua Maria Borba, 86",endereco, "São Paulo", "03 de Março"));
+          blocos.add(new Bloco("Bloco da Catuaba","Rua Augusta, São Paulo",endereco, "São Paulo", "04 de Março"));    
 
         //
     }
 
-    public Blocos[] blocosProximos() {
+    public Bloco[] blocosProximos() {
         return bcProximos;
     }
 
@@ -84,6 +80,11 @@ public class PesquisaBlocos extends javax.swing.JFrame {
         txtEndereco.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtEnderecoMouseClicked(evt);
+            }
+        });
+        txtEndereco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEnderecoActionPerformed(evt);
             }
         });
 
@@ -200,7 +201,7 @@ public class PesquisaBlocos extends javax.swing.JFrame {
 
         if (cbBlocos.getSelectedItem().equals(bloco)) {
             //Percorre array para localizar o bloco
-            for (Blocos bc : blocos) {
+            for (Bloco bc : blocos) {
                 System.out.println(bc.getNome());
                 if (bc.getNome().equals(bloco)) {
                     System.out.println(bc.getKm());
@@ -224,59 +225,34 @@ public class PesquisaBlocos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Digite um endereço.", "ALERTA!", JOptionPane.WARNING_MESSAGE);
         }
 
-        blocoSelecionado("Casa Comigo");
+        blocoSelecionado(cbBlocos.getSelectedItem().toString());
+
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void cbDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDiaActionPerformed
         cbBlocos.removeAllItems();
         cbCidade.setSelectedItem("Informe a Cidade");
+        
         cbBlocos.addItem("Informe o Bloco");
     }//GEN-LAST:event_cbDiaActionPerformed
 
     private void cbCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCidadeActionPerformed
-        if (cbCidade.getSelectedItem().equals("São Paulo") && cbDia.getSelectedItem().equals("03 de Março")) {
-            cbBlocos.removeAllItems();
-            cbBlocos.addItem("Informe o Bloco");
-            cbBlocos.addItem("Ma-que-bloco");
-            cbBlocos.addItem("Casa Comigo");
+        
+        cbBlocos.removeAllItems();
+         cbBlocos.addItem("Informe o Bloco");
+        //Percorre Array e verifica quais blocos tem a cidade e o dia selecionados
+        for (Bloco bc : blocos) {
+            if (cbCidade.getSelectedItem().equals(bc.getCidade())&&cbDia.getSelectedItem().equals(bc.getDia())) {
+               
+                cbBlocos.addItem(bc.getNome().toString());
+            }
         }
-        if (cbCidade.getSelectedItem().equals("São Paulo") && cbDia.getSelectedItem().equals("04 de Março")) {
-            cbBlocos.removeAllItems();
-            cbBlocos.addItem("Informe o Bloco");
-            cbBlocos.addItem("Bloco da Catuaba");
-            cbBlocos.addItem("Bloco RabuSuju");
-            cbBlocos.addItem("Bloco de Notas");
-            cbBlocos.addItem("Bloco do Bagaça");
-            cbBlocos.addItem("Bloco Se Joga");
-            cbBlocos.addItem("Bloco do Apego");
 
-        }
-        if (cbCidade.getSelectedItem().equals("São Paulo") && cbDia.getSelectedItem().equals("05 de Março")) {
-            cbBlocos.removeAllItems();
-            cbBlocos.addItem("Informe o Bloco");
-            cbBlocos.addItem("Bloco do Síndico");
-            cbBlocos.addItem("Bloco do Pequeno Burguês");
-            cbBlocos.addItem("Bloco Vou de Táxi");
-            cbBlocos.addItem("Bloco Tô de Chico ");
-            cbBlocos.addItem("Bloco Se Te Pego Não Largo");
-
-        }
-        if (cbCidade.getSelectedItem().equals("Jundiaí") && cbDia.getSelectedItem().equals("03 de Março")) {
-            cbBlocos.removeAllItems();
-            cbBlocos.addItem("Informe o Bloco");
-
-        }
-        if (cbCidade.getSelectedItem().equals("Jundiaí") && cbDia.getSelectedItem().equals("04 de Março")) {
-            cbBlocos.removeAllItems();
-            cbBlocos.addItem("Informe o Bloco");
-            cbBlocos.addItem("Carne com Queijo");
-        }
-        if (cbCidade.getSelectedItem().equals("Jundiaí") && cbDia.getSelectedItem().equals("05 de Março")) {
-            cbBlocos.removeAllItems();
-            cbBlocos.addItem("Informe o Bloco");
-        }
-        // TODO add your handling code here:
     }//GEN-LAST:event_cbCidadeActionPerformed
+
+    private void txtEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEnderecoActionPerformed
+     
+    }//GEN-LAST:event_txtEnderecoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -299,9 +275,7 @@ public class PesquisaBlocos extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(PesquisaBlocos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
+  
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
