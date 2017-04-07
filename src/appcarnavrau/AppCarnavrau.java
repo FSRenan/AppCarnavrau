@@ -1,9 +1,17 @@
 package appcarnavrau;
 
-public class AppCarnavrau extends javax.swing.JFrame {
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
+public class AppCarnavrau extends javax.swing.JFrame {
+ 
+    private String endereco;
     public AppCarnavrau() {
         initComponents();
+        endereco = JOptionPane.showInputDialog("BEM-VINDO AO APP CARNAVRAU!", "Digite seu endereço");
+        
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -19,7 +27,6 @@ public class AppCarnavrau extends javax.swing.JFrame {
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(null);
 
         btnLogar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/appcarnavrau/LoginFacebook.png"))); // NOI18N
         btnLogar.setToolTipText("");
@@ -28,12 +35,25 @@ public class AppCarnavrau extends javax.swing.JFrame {
                 btnLogarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnLogar);
-        btnLogar.setBounds(50, 120, 240, 31);
 
         lblFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/appcarnavrau/TelaInicio2.jpg"))); // NOI18N
-        jPanel1.add(lblFundo);
-        lblFundo.setBounds(0, 0, 340, 470);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(btnLogar, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(lblFundo, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(120, 120, 120)
+                .addComponent(btnLogar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(lblFundo, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -64,8 +84,12 @@ public class AppCarnavrau extends javax.swing.JFrame {
         System.out.println(retorno.getFoto().getUrl());
         //----------------------
         this.setVisible(false);
-        //Chama o frame do feed passando como parâmetro os dados do usuário
-        new Feed(retorno).setVisible(true);
+        try {
+            //Chama o frame do feed passando como parâmetro os dados do usuário
+            new Feed(retorno,endereco).setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(AppCarnavrau.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_btnLogarActionPerformed
 

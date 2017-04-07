@@ -28,7 +28,7 @@ public class PesquisaBlocos extends javax.swing.JFrame {
         initComponents();
         //Receberá do construtor o endereco da tela de login
         atualizarArray(endereco);
-        blocosProximos();
+        
 
     }
 
@@ -38,6 +38,7 @@ public class PesquisaBlocos extends javax.swing.JFrame {
         blocos.add(new Bloco("Casa Comigo", "Avenida Faria Lima", endereco, "São Paulo", "03 de Março"));
         blocos.add(new Bloco("Ma-que-bloco", "Rua Maria Borba, 86", endereco, "São Paulo", "03 de Março"));
         blocos.add(new Bloco("Bloco da Catuaba", "Rua Augusta, São Paulo", endereco, "São Paulo", "04 de Março"));
+        blocos.add(new Bloco("Bloco da Ponte Torta","Vianelo, Jundiaí",endereco,"Jundiaí","05 de Março"));
 
         //
     }

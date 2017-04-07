@@ -29,19 +29,33 @@ public class Feed extends javax.swing.JFrame {
 
     //Atributos da classe
     private DadosUsuario dados;
-    private String endereco = "Av. Paulista";
+    private String endereco;
+    private PesquisaBlocos pb;
 
     //Construtores
     public Feed() {
 
     }
 
-    public Feed(DadosUsuario dados) {
+    public Feed(DadosUsuario dados, String endereco) throws Exception {
         this.dados = dados;
+        this.endereco = endereco;
         initComponents();
 
         //Inicia processo paralelo de pesquisa das imagens do twitter
         new Thread(t1).start();
+        pb = new PesquisaBlocos(endereco);            
+            
+            
+        verificaBlocosProximos();
+    }
+    public void verificaBlocosProximos(){
+        Bloco bcProx[] = pb.blocosProximos();
+        
+        txtBloco1.setText(bcProx[0].getNome());
+        txtBloco2.setText(bcProx[1].getNome());
+        txtBloco3.setText(bcProx[2].getNome());
+        
     }
     //Execução paralela de atualizar imagens do twitter
     private Runnable t1 = new Runnable() {
@@ -157,6 +171,7 @@ public class Feed extends javax.swing.JFrame {
 
         jPainel.setBackground(new java.awt.Color(255, 255, 255));
 
+        btnGame.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnGame.setText("Game");
         btnGame.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,6 +179,7 @@ public class Feed extends javax.swing.JFrame {
             }
         });
 
+        btnPesquisaBlocos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnPesquisaBlocos.setText("Pesquisa de Blocos");
         btnPesquisaBlocos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,14 +187,30 @@ public class Feed extends javax.swing.JFrame {
             }
         });
 
+        txtBloco1.setEditable(false);
+        txtBloco1.setBackground(new java.awt.Color(0, 0, 0));
+        txtBloco1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtBloco1.setForeground(new java.awt.Color(255, 255, 255));
         txtBloco1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBloco1ActionPerformed(evt);
             }
         });
 
+        txtBloco2.setEditable(false);
+        txtBloco2.setBackground(new java.awt.Color(0, 0, 0));
+        txtBloco2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtBloco2.setForeground(new java.awt.Color(255, 255, 255));
+
+        txtBloco3.setEditable(false);
+        txtBloco3.setBackground(new java.awt.Color(0, 0, 0));
+        txtBloco3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtBloco3.setForeground(new java.awt.Color(255, 255, 255));
+
+        lblInformacao.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         lblInformacao.setText("BLOCOS MAIS PROXIMOS DE VOCE:");
 
+        btnSobre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnSobre.setText("Sobre");
 
         lblCont.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -195,89 +227,86 @@ public class Feed extends javax.swing.JFrame {
         jPainelLayout.setHorizontalGroup(
             jPainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPainelLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(txtBloco1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPainelLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(lblFOTO1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPainelLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(lblFOTO3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPainelLayout.createSequentialGroup()
-                .addGap(390, 390, 390)
-                .addComponent(lblCont))
-            .addComponent(lblFundo, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(jPainelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(btnGame, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPainelLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(txtBloco2, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPainelLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(txtBloco3, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPainelLayout.createSequentialGroup()
-                .addGap(220, 220, 220)
-                .addComponent(lblFOTO4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPainelLayout.createSequentialGroup()
-                .addGap(150, 150, 150)
-                .addComponent(btnPesquisaBlocos))
-            .addGroup(jPainelLayout.createSequentialGroup()
-                .addGap(220, 220, 220)
-                .addComponent(lblFOTO2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPainelLayout.createSequentialGroup()
-                .addGap(290, 290, 290)
-                .addComponent(btnSobre, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPainelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(lblInformacao, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(lblQUADROFOTOS)
+                .addGroup(jPainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPainelLayout.createSequentialGroup()
+                        .addGap(420, 420, 420)
+                        .addComponent(lblCont))
+                    .addGroup(jPainelLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(btnGame, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(btnPesquisaBlocos)
+                        .addGap(33, 33, 33)
+                        .addComponent(btnSobre, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPainelLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(lblInformacao, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPainelLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(txtBloco1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPainelLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(txtBloco2, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPainelLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(txtBloco3, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPainelLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(jPainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPainelLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(lblFOTO3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(lblFOTO2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPainelLayout.createSequentialGroup()
+                                .addGap(220, 220, 220)
+                                .addComponent(lblFOTO4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPainelLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(lblFOTO1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblQUADROFOTOS)))
+                    .addComponent(lblFundo, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         jPainelLayout.setVerticalGroup(
             jPainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPainelLayout.createSequentialGroup()
-                .addGap(120, 120, 120)
+                .addComponent(lblCont, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnGame, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPesquisaBlocos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSobre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addComponent(lblInformacao)
+                .addGap(10, 10, 10)
                 .addComponent(txtBloco1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(100, 100, 100)
-                .addComponent(lblFOTO1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(lblFOTO3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(lblCont, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(txtBloco2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(txtBloco3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addGroup(jPainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPainelLayout.createSequentialGroup()
+                        .addGap(210, 210, 210)
+                        .addComponent(lblFOTO3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPainelLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(lblFOTO2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPainelLayout.createSequentialGroup()
+                        .addGap(214, 214, 214)
+                        .addComponent(lblFOTO4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPainelLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(lblFOTO1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblQUADROFOTOS, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addComponent(lblFundo, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(jPainelLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(btnGame, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPainelLayout.createSequentialGroup()
-                .addGap(160, 160, 160)
-                .addComponent(txtBloco2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPainelLayout.createSequentialGroup()
-                .addGap(200, 200, 200)
-                .addComponent(txtBloco3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPainelLayout.createSequentialGroup()
-                .addGap(454, 454, 454)
-                .addComponent(lblFOTO4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPainelLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(btnPesquisaBlocos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPainelLayout.createSequentialGroup()
-                .addGap(250, 250, 250)
-                .addComponent(lblFOTO2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPainelLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(btnSobre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPainelLayout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addComponent(lblInformacao))
-            .addGroup(jPainelLayout.createSequentialGroup()
-                .addGap(240, 240, 240)
-                .addComponent(lblQUADROFOTOS, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPainel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPainel, javax.swing.GroupLayout.PREFERRED_SIZE, 490, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -296,13 +325,11 @@ public class Feed extends javax.swing.JFrame {
 
     private void btnPesquisaBlocosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaBlocosActionPerformed
         try {
-            PesquisaBlocos pb = new PesquisaBlocos(endereco);
             pb.setVisible(true);
-            this.setVisible(false);
+            // this.setVisible(false);
         } catch (Exception ex) {
             Logger.getLogger(Feed.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
 
     }//GEN-LAST:event_btnPesquisaBlocosActionPerformed
 
