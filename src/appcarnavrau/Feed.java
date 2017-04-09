@@ -167,9 +167,16 @@ public class Feed extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 102, 153));
+        setPreferredSize(new java.awt.Dimension(435, 670));
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPainel.setBackground(new java.awt.Color(255, 255, 255));
+        jPainel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPainel.add(lblFOTO2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 210, 200));
+        jPainel.add(lblFOTO3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 210, 210));
+        jPainel.add(lblFOTO4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 460, 200, 200));
+        jPainel.add(lblFOTO1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 210, 200));
 
         btnGame.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnGame.setText("Game");
@@ -178,6 +185,7 @@ public class Feed extends javax.swing.JFrame {
                 btnGameActionPerformed(evt);
             }
         });
+        jPainel.add(btnGame, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 120, 30));
 
         btnPesquisaBlocos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnPesquisaBlocos.setText("Pesquisa de Blocos");
@@ -186,6 +194,7 @@ public class Feed extends javax.swing.JFrame {
                 btnPesquisaBlocosActionPerformed(evt);
             }
         });
+        jPainel.add(btnPesquisaBlocos, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, -1, 30));
 
         txtBloco1.setEditable(false);
         txtBloco1.setBackground(new java.awt.Color(0, 0, 0));
@@ -196,122 +205,42 @@ public class Feed extends javax.swing.JFrame {
                 txtBloco1ActionPerformed(evt);
             }
         });
+        jPainel.add(txtBloco1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 410, 30));
 
         txtBloco2.setEditable(false);
         txtBloco2.setBackground(new java.awt.Color(0, 0, 0));
         txtBloco2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtBloco2.setForeground(new java.awt.Color(255, 255, 255));
+        jPainel.add(txtBloco2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 410, 30));
 
         txtBloco3.setEditable(false);
         txtBloco3.setBackground(new java.awt.Color(0, 0, 0));
         txtBloco3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtBloco3.setForeground(new java.awt.Color(255, 255, 255));
+        jPainel.add(txtBloco3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 410, 30));
 
         lblInformacao.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         lblInformacao.setText("BLOCOS MAIS PROXIMOS DE VOCE:");
+        jPainel.add(lblInformacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 290, -1));
 
         btnSobre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnSobre.setText("Sobre");
+        jPainel.add(btnSobre, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 40, 70, 30));
 
         lblCont.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblCont.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblCont.setText("10s");
+        jPainel.add(lblCont, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 0, -1, 40));
 
         lblQUADROFOTOS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/appcarnavrau/stock-vector-poster-with-paper-frame-colored-dust-confetti-balls-and-serpentine-ribbon-and-empty-space-for-584318125.jpg"))); // NOI18N
+        jPainel.add(lblQUADROFOTOS, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, -1, 430));
 
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, lblQUADROFOTOS, org.jdesktop.beansbinding.ELProperty.create("${background}"), lblFundo, org.jdesktop.beansbinding.BeanProperty.create("background"));
         bindingGroup.addBinding(binding);
 
-        javax.swing.GroupLayout jPainelLayout = new javax.swing.GroupLayout(jPainel);
-        jPainel.setLayout(jPainelLayout);
-        jPainelLayout.setHorizontalGroup(
-            jPainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPainelLayout.createSequentialGroup()
-                .addGroup(jPainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPainelLayout.createSequentialGroup()
-                        .addGap(420, 420, 420)
-                        .addComponent(lblCont))
-                    .addGroup(jPainelLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(btnGame, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(btnPesquisaBlocos)
-                        .addGap(33, 33, 33)
-                        .addComponent(btnSobre, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPainelLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(lblInformacao, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPainelLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(txtBloco1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPainelLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(txtBloco2, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPainelLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(txtBloco3, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPainelLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(jPainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPainelLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(lblFOTO3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(lblFOTO2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPainelLayout.createSequentialGroup()
-                                .addGap(220, 220, 220)
-                                .addComponent(lblFOTO4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPainelLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(lblFOTO1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lblQUADROFOTOS)))
-                    .addComponent(lblFundo, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-        jPainelLayout.setVerticalGroup(
-            jPainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPainelLayout.createSequentialGroup()
-                .addComponent(lblCont, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnGame, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPesquisaBlocos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSobre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addComponent(lblInformacao)
-                .addGap(10, 10, 10)
-                .addComponent(txtBloco1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(txtBloco2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(txtBloco3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addGroup(jPainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPainelLayout.createSequentialGroup()
-                        .addGap(210, 210, 210)
-                        .addComponent(lblFOTO3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPainelLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(lblFOTO2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPainelLayout.createSequentialGroup()
-                        .addGap(214, 214, 214)
-                        .addComponent(lblFOTO4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPainelLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(lblFOTO1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblQUADROFOTOS, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addComponent(lblFundo, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        jPainel.add(lblFundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, 0, 460, 670));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPainel, javax.swing.GroupLayout.PREFERRED_SIZE, 490, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPainel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        getContentPane().add(jPainel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 429, -1));
 
         bindingGroup.bind();
 
